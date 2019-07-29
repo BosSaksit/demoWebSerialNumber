@@ -7,35 +7,53 @@
 </ion-header>
 
 <ion-content text-center>
-  <ion-card>
+  <form [formGroup]="data" (ngSubmit)="presentAlertConfirm()">
 
-    ข้อมูลพระ
-    <ion-row>
+    <ion-card>
+      
+      ข้อมูลพระ
 
-      <ion-col>
-        <ion-item>
+      <ion-row>
+        
+        <ion-col>
+        <ion-item [class.invalid]="submitRequested && f.typeAmulet.errors">
           <ion-label>ประเภทพระ</ion-label>
-          <ion-input placeholder="กรุณากรอกประเภทพระ"></ion-input>
+          <ion-input type="text" formControlName="typeAmulet" placeholder="กรุณากรอกประเภทพระ"></ion-input>
         </ion-item>
+        <ion-item *ngIf="submitRequested && f.typeAmulet.errors">
+            <span class="invalid-msg">
+              กรุณากรอกประเภทพระ
+            </span>
+          </ion-item>
       </ion-col>
-
+      
       <ion-col>
-        <ion-item>
+        <ion-item [class.invalid]="submitRequested && f.nameAmulet.errors">
           <ion-label>ชื่อพระ</ion-label>
-          <ion-input placeholder="กรุณากรอกชื่อพระ"></ion-input>
+          <ion-input type="text" formControlName="nameAmulet" placeholder="กรุณากรอกชื่อพระ"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="submitRequested && f.nameAmulet.errors">
+          <span class="invalid-msg">
+            กรุณากรอกชื่อพระ
+          </span>
         </ion-item>
       </ion-col>
 
       <ion-col>
-        <ion-item>
+        <ion-item [class.invalid]="submitRequested && f.shapeAmulet.errors">
           <ion-label>ชื่อพิมพ์</ion-label>
-          <ion-input placeholder="กรุณากรอกชื่อพิมพ์"></ion-input>
+          <ion-input type="text" formControlName="shapeAmulet" placeholder="กรุณากรอกชื่อพิมพ์"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="submitRequested && f.shapeAmulet.errors">
+          <span class="invalid-msg">
+            กรุณากรอกชื่อพิมพ์
+          </span>
         </ion-item>
       </ion-col>
 
     </ion-row>
-
-    <ion-row>
+    
+    <ion-row> 
 
       <ion-col>
         <ion-item>
@@ -43,7 +61,7 @@
           <ion-input placeholder="กรุณากรอกมวลสาร"></ion-input>
         </ion-item>
       </ion-col>
-
+      
       <ion-col>
         <ion-item>
           <ion-label>ชื่อพระที่ปลุกเสก</ion-label>
@@ -61,7 +79,7 @@
     </ion-row>
 
     <ion-row>
-
+      
       <ion-col>
         <ion-item>
           <ion-label>วัดที่ปลุกเสก</ion-label>
@@ -75,30 +93,30 @@
           <ion-input placeholder="กรุณากรอกจังหวัด"></ion-input>
         </ion-item>
       </ion-col>
-
+      
       <ion-col>
         <ion-item>
-          <ion-label>วันที่ปลุกเสก</ion-label>
-          <ion-input placeholder="กรุณากรอกวันที่ปลุกเสก"></ion-input>
+          <ion-label>ชื่อเจ้าภาพ</ion-label>
+          <ion-input placeholder="กรุณากรอกชื่อเจ้าภาพ"></ion-input>
         </ion-item>
       </ion-col>
 
     </ion-row>
   </ion-card>
-
+  
   <ion-card>
     ข้อมูลเจนรหัส
     <ion-row>
 
-        <ion-col>
+      <ion-col>
             <ion-item>
               <ion-label>รหัสนำ</ion-label>
               <ion-input placeholder="กรุณากรอกรหัสนำ"></ion-input>
             </ion-item>
           </ion-col>
-
-      <ion-col>
-        <ion-item>
+          
+          <ion-col>
+            <ion-item>
           <ion-label>ครั้งที่เจนรหัสในเดือน</ion-label>
           <ion-input placeholder="กรุณากรอกครั้งที่เจนรหัสในเดือน"></ion-input>
         </ion-item>
@@ -114,8 +132,10 @@
     </ion-row>
 
   </ion-card>
-  <ion-button shape="round">ตกลง</ion-button>
-
+  <ion-button shape="round" type="submit">ตกลง</ion-button>
+  <ion-button shape="round" (click)="gotoInfoData()">ดูข้อมูล</ion-button>
+</form>
+  
 
 
 </ion-content>
