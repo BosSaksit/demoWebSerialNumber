@@ -25,15 +25,15 @@ export class HomePage {
       'shapeAmulet': [null, Validators.compose([
         Validators.required
       ])],
-      // 'compoundAmulet': [null, Validators.required],
-      // 'nameMonk': [null, Validators.required],
-      // 'dateConsecrate': [null, Validators.required],
-      // 'temple': [null, Validators.required],
-      // 'province': [null, Validators.required],
-      // 'nameHost': [null, Validators.required],
-      // 'firstId': [null, Validators.required],
-      // 'countGenIdOfMount': [null, Validators.required],
-      // 'amountGenId': [null, Validators.required]
+      'compoundAmulet': [null, Validators.required],
+      'nameMonk': [null, Validators.required],
+      'dateConsecrate': [null, Validators.required],
+      'temple': [null, Validators.required],
+      'province': [null, Validators.required],
+      'nameHost': [null, Validators.required],
+      'firstId': [null, Validators.required],
+      'countGenIdOfMount': [null, Validators.required],
+      'amountGenId': [null, Validators.required]
     });
   }
   get f() { return this.data.controls; }
