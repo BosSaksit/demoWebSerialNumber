@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { CallapiService } from '../callapi.service';
 
 
 @Component({
@@ -9,11 +10,12 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
+  getDataCallApi:any;
   data: FormGroup;
   private submitRequested: boolean = false;
 
-  constructor(public alertController: AlertController, public navCtrl: NavController, public fb: FormBuilder) {
+  constructor(public alertController: AlertController, public navCtrl: NavController, public fb: FormBuilder,
+    public callapi:CallapiService) {
     this.data = this.fb.group({
       'id': [null],
       'typeAmulet': ['', Validators.compose([
@@ -41,7 +43,14 @@ export class HomePage {
   public gotoInfoData() {
     this.navCtrl.navigateForward('info-data');
   }
-
+  
+  public logCallApi(){
+    this.callapi.getUserAll().subscribe((it)=>{
+      console.log(it);
+      this.getDataCallApi = it;
+      console.log(this.getDataCallApi)
+    });
+  }
 
 
   presentAlertConfirm(value: any): void {
