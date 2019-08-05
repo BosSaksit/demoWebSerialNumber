@@ -28,21 +28,21 @@
     </ion-col>
   </ion-row>
 
-  <ion-item text-center>
+  <ion-item text-center *ngFor="let x of getDataAll">
       <ion-col size="2">
-        123456789
+        {{ x.serial }}
       </ion-col>
       <ion-col size="3">
-        ชื่อพระ
+        {{ x.typeAmulet }}
       </ion-col>
       <ion-col  size="3">
-        วันที่สร้าง
+        {{ x.nameAmulet }}
       </ion-col>
       <ion-col  size="3">
-        ประเภทพระ
+        {{ x.dateConsecrate }}
       </ion-col>
       <ion-col size="1">
-        <ion-button size="small">
+        <ion-button  (click)="toSeeData()" size="small">
           <ion-icon slot="icon-only" name="star"></ion-icon>
         </ion-button>
       </ion-col>

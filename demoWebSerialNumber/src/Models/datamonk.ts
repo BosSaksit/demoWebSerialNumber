@@ -1,6 +1,7 @@
 export class datamonk {
-    id:string;
+    monkId:string;
     //ประเภทพระเครื่อง
+    serial:string;
     typeAmulet:string;
      //ชื่อพระเครื่อง
     nameAmulet:string;
@@ -23,5 +24,5 @@ export class datamonk {
     //ครั้งที่เจนรหัสในเดือน
     countGenIdOfMount:string;
     //จำนวนที่เจนรหัส
-    amountGenId:string;
+    amountGenId:number;
 }

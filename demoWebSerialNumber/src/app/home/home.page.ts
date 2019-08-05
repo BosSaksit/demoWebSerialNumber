@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CallapiService } from '../callapi.service';
+import { datamonk } from 'src/Models/datamonk';
 
 
 @Component({
@@ -10,12 +11,14 @@ import { CallapiService } from '../callapi.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-  getDataCallApi:any;
+  getDataCallApi: any;
   data: FormGroup;
-  private submitRequested: boolean = false;
+  monkData: datamonk
+  submitRequested: boolean = false;
+  num:number = 1;
 
   constructor(public alertController: AlertController, public navCtrl: NavController, public fb: FormBuilder,
-    public callapi:CallapiService) {
+    public callapi: CallapiService) {
     this.data = this.fb.group({
       'id': [null],
       'typeAmulet': ['', Validators.compose([
@@ -43,9 +46,9 @@ export class HomePage {
   public gotoInfoData() {
     this.navCtrl.navigateForward('info-data');
   }
-  
-  public logCallApi(){
-    this.callapi.getUserAll().subscribe((it)=>{
+
+  public logCallApi() {
+    this.callapi.getMonkAll().subscribe((it) => {
       console.log(it);
       this.getDataCallApi = it;
       console.log(this.getDataCallApi)
@@ -53,38 +56,64 @@ export class HomePage {
   }
 
 
-  presentAlertConfirm(value: any): void {
+  public async presentAlertConfirm() {
     this.submitRequested = true;
-    console.log(this.data.value);
-    if (this.data.invalid) {
-      return;
+    console.log(this.data);
+    if (this.data.valid) {
+      const alert = await this.alertController.create({
+        header: 'เพิ่มข้อมูลพระ!',
+        message: 'ยืนยันการเพิ่มข้อมูลพระจำนวน',
+        buttons: [
+          {
+            text: 'ยกเลิก',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: (blah) => {
+              console.log('ยกเลิกการเพิ่มข้อมูลพระ');
+            }
+          }, {
+            text: 'ยืนยัน',
+            handler: () => {
+              console.log('เพิ่มข้อมูล');
+              console.log(this.data);
+              console.log(this.data.value);  
+              this.monkData = this.data.value;
+              for (let index = 1; index <= this.monkData.amountGenId; index++) {
+                this.monkData.monkId = index.toString();
+                console.log(this.monkData.firstId);
+                console.log(this.monkData);
+  
+                this.callapi.addUser(this.monkData).subscribe(it =>{
+                  console.log(it);
+                  
+                });
+                
+              }
+              console.log('AddDataSucess');
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+      
+      
+    }else{
+      const alert = await this.alertController.create({
+        header: 'ข้อมูลไม่ถูกต้อง',
+        subHeader: 'Subtitle',
+        message: 'กรุณากรอกข้อมูลให้ถูกต้อง',
+        buttons: ['OK']
+      });
+  
+      await alert.present();
     }
-    // const alert = await this.alertController.create({
-    //   header: 'เพิ่มข้อมูลเรียบร้อย',
-    //   message: 'เพิ่มข้อมูลลงระบบเรียบร้อยแล้ว',
-    //   buttons: [
-    //     {
-    //       text: 'ยกเลิก',
-    //       role: 'cancel',
-    //       cssClass: 'secondary',
-    //       handler: (blah) => {
-    //         console.log('Confirm Cancel: blah');
-    //       }
-    //     }, {
-    //       text: 'ตกลง',
-    //       handler: () => {
-    //         console.log('Confirm Okay');
-    //       }
-    //     }
-    //   ]
-    // });
-
-    // await alert.present();
+    
   }
 
-  // public isValid(name: string): boolean {
-  //   var ctrl = this.data.get(name);
-  //   return ctrl.invalid && (ctrl.dirty || this.submitRequested);
-  // }
+  public isValid(name: string): boolean {
+    var ctrl = this.data.get(name);
+    return ctrl.invalid && (ctrl.dirty || this.submitRequested);
+  }
 
 }
