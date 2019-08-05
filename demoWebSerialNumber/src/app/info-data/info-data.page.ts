@@ -23,8 +23,8 @@ export class InfoDataPage implements OnInit {
     });
   }
 
-  public toSeeData() {
-   this.navCtrl.navigateForward('see-data');
+  public toSeeData(id) {
+  this.router.navigate(['/see-data', { _id: id }]);
   }
 
 }

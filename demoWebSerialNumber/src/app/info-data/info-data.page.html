@@ -8,45 +8,47 @@
 </ion-header>
 
 <ion-content text-center>
- <h3>ข้อมูล</h3>
+  <ion-card>
+    <h3>ข้อมูล</h3>
 
-  <ion-row>
-    <ion-col size="2" style="background-color: rgb(216, 219, 9)">
-      รหัส
-    </ion-col>
-    <ion-col size="3" style="background-color: rgb(216, 219, 9)">
-      ชื่อพระ
-    </ion-col>
-    <ion-col  size="3" style="background-color: rgba(216, 219, 9)">
-      วันที่สร้าง
-    </ion-col>
-    <ion-col  size="3" style="background-color: rgba(216, 219, 9)">
-      ประเภทพระ
-    </ion-col>
-    <ion-col size="1" style="background-color: rgb(216, 219, 9)">
-      ดูข้อมูล
-    </ion-col>
-  </ion-row>
+    <ion-row>
+      <ion-col size="2" style="background-color: rgb(216, 219, 9)">
+        รหัส
+      </ion-col>
+      <ion-col size="3" style="background-color: rgb(216, 219, 9)">
+        ชื่อพระ
+      </ion-col>
+      <ion-col size="3" style="background-color: rgba(216, 219, 9)">
+        วันที่สร้าง
+      </ion-col>
+      <ion-col size="3" style="background-color: rgba(216, 219, 9)">
+        ประเภทพระ
+      </ion-col>
+      <ion-col size="1" style="background-color: rgb(216, 219, 9)">
+        ดูข้อมูล
+      </ion-col>
+    </ion-row>
 
-  <ion-item text-center *ngFor="let x of getDataAll">
+    <ion-item text-center *ngFor="let x of getDataAll">
       <ion-col size="2">
         {{ x.serial }}
       </ion-col>
       <ion-col size="3">
         {{ x.typeAmulet }}
       </ion-col>
-      <ion-col  size="3">
+      <ion-col size="3">
         {{ x.nameAmulet }}
       </ion-col>
-      <ion-col  size="3">
+      <ion-col size="3">
         {{ x.dateConsecrate }}
       </ion-col>
       <ion-col size="1">
-        <ion-button  (click)="toSeeData()" size="small">
-          <ion-icon slot="icon-only" name="star"></ion-icon>
+        <ion-button (click)="toSeeData(x.monkId)" size="small">
+          <ion-icon slot="icon-only" name="eye"></ion-icon>
         </ion-button>
       </ion-col>
-  </ion-item>
-    
-  
+
+    </ion-item>
+  </ion-card>
+
 </ion-content>

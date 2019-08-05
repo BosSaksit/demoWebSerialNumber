@@ -25,7 +25,7 @@ export class CallapiService {
   }
 
   public getUserById(Id: string){
-    return this.http.get<datamonk>(CallapiService.host + 'User/GetbyId/'+ Id);
+    return this.http.get<datamonk>(CallapiService.host + 'DataMonk/GetMonkDataById/'+ Id);
   }
 
 }
