@@ -40,6 +40,8 @@ export class SeeDataPage implements OnInit {
   countGenIdOfMount:string;
   //จำนวนที่เจนรหัส
   amountGenId:number;
+  //จำนวนที่
+  countMonk:string;
 
   
   constructor(public callapi:CallapiService ,public activatedRoute:ActivatedRoute) {
@@ -64,6 +66,7 @@ export class SeeDataPage implements OnInit {
       this.province = this.dataById.province;
       this.nameHost = this.dataById.nameHost;
       this.amountGenId = this.dataById.amountGenId;
+      this.countMonk = this.dataById.countMonk;
     });
   }
 

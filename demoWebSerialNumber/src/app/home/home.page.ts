@@ -3,6 +3,7 @@ import { AlertController, NavController } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CallapiService } from '../callapi.service';
 import { datamonk } from 'src/Models/datamonk';
+import { log } from 'util';
 
 
 @Component({
@@ -21,6 +22,7 @@ export class HomePage {
     public callapi: CallapiService) {
     this.data = this.fb.group({
       'id': [null],
+      'countMonk':[null],
       'typeAmulet': ['', Validators.compose([
         Validators.required
       ])],
@@ -79,6 +81,8 @@ export class HomePage {
               console.log(this.data.value);  
               this.monkData = this.data.value;
               for (let index = 1; index <= this.monkData.amountGenId; index++) {
+                this.monkData.countMonk = index.toString() +"/"+ this.monkData.amountGenId.toString();
+                console.log(this.monkData.countMonk);
                 this.monkData.monkId = index.toString();
                 console.log(this.monkData.firstId);
                 console.log(this.monkData);

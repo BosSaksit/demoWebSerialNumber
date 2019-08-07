@@ -1,7 +1,9 @@
 export class datamonk {
     monkId:string;
+    //จำนวนพระ
+    countMonk:string;
+    serial:string; 
     //ประเภทพระเครื่อง
-    serial:string;
     typeAmulet:string;
      //ชื่อพระเครื่อง
     nameAmulet:string;
